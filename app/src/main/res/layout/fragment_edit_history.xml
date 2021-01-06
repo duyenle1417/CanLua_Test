@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditHistoryFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--Phần tên giống lúa-->
+        <TextView
+            android:id="@+id/textView_tenLua"
+            style="@style/TextViewLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:text="Tên giống lúa"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/edittext_tenLua"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/edit_text_bg_white"
+            android:inputType="text|textPersonName"
+            android:nextFocusDown="@id/edittext_dongia"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_tenLua" />
+
+        <!--Phần đơn giá lúa/kg-->
+        <TextView
+            android:id="@+id/textView_dongia"
+            style="@style/TextViewLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:text="Đơn giá"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edittext_tenLua" />
+
+        <EditText
+            android:id="@+id/edittext_dongia"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/edit_text_bg_white_half"
+            android:inputType="number"
+            android:maxLength="5"
+            android:nextFocusDown="@id/edittext_trubi"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toStartOf="@+id/textView_dongia_extra"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_dongia" />
+
+        <TextView
+            android:id="@+id/textView_dongia_extra"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/text_view_bg_red"
+            android:gravity="center_horizontal"
+            android:text="VND"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_dongia" />
+
+        <!--Phần trừ bì-->
+        <TextView
+            android:id="@+id/textView_trubi"
+            style="@style/TextViewLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:text="Trừ bì"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edittext_dongia" />
+
+        <EditText
+            android:id="@+id/edittext_trubi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/edit_text_bg_white_half"
+            android:inputType="number"
+            android:maxLength="2"
+            android:nextFocusDown="@id/edittext_tiencoc"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toStartOf="@+id/textView_trubi_extra"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_trubi" />
+
+        <TextView
+            android:id="@+id/textView_trubi_extra"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/text_view_bg_red"
+            android:gravity="center_horizontal"
+            android:text="BAO/KG"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_trubi" />
+
+        <Button
+            android:id="@+id/btn_update"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="100dp"
+            android:layout_marginRight="100dp"
+            android:background="@drawable/button_bg_red"
+            android:text="Cập nhật"
+            android:textColor="@color/button_textColor_white"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edittext_tiencoc" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/no_edit_data_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_update">
+
+            <!--Phần tổng số bao lúa-->
+            <TextView
+                android:id="@+id/textView_tongbaolua"
+                style="@style/TextViewLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="24dp"
+                android:text="Tổng bao lúa"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_info_tongbaolua"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/edit_text_bg_white_half"
+                android:inputType="number"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toStartOf="@+id/textView_tongbaolua_extra"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_tongbaolua" />
+
+            <TextView
+                android:id="@+id/textView_tongbaolua_extra"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/text_view_bg_red"
+                android:gravity="center_horizontal"
+                android:text="BAO"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_tongbaolua" />
+
+            <!--Phần tổng số kg lúa-->
+            <TextView
+                android:id="@+id/textView_tongkylua"
+                style="@style/TextViewLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="24dp"
+                android:text="Tổng ký lúa"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_info_tongbaolua" />
+
+            <TextView
+                android:id="@+id/textView_info_tongkylua"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/edit_text_bg_white_half"
+                android:inputType="number"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toStartOf="@+id/textView_tongkylua_extra"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_tongkylua" />
+
+            <TextView
+                android:id="@+id/textView_tongkylua_extra"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/text_view_bg_red"
+                android:gravity="center_horizontal"
+                android:text="KG"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_tongkylua" />
+
+            <!--Phần tổng tiền-->
+            <TextView
+                android:id="@+id/textView_thanhtien"
+                style="@style/TextViewLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="24dp"
+                android:text="Thành tiền"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_info_tongkylua" />
+
+            <TextView
+                android:id="@+id/textView_info_thanhtien"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/edit_text_bg_white_half"
+                android:inputType="number"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toStartOf="@+id/textView_thanhtien_extra"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_thanhtien" />
+
+            <TextView
+                android:id="@+id/textView_thanhtien_extra"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/text_view_bg_red"
+                android:gravity="center_horizontal"
+                android:text="VND"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_thanhtien" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <!--Phần tiền cọc khách đưa trc-->
+        <TextView
+            android:id="@+id/textView_tiencoc"
+            style="@style/TextViewLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:text="Tiền cọc"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_trubi_extra" />
+
+        <EditText
+            android:id="@+id/edittext_tiencoc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/edit_text_bg_white_half"
+            android:inputType="number"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toStartOf="@+id/textView_tiencoc_extra"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_tiencoc" />
+
+        <TextView
+            android:id="@+id/textView_tiencoc_extra"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/text_view_bg_red"
+            android:gravity="center_horizontal"
+            android:text="VND"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_tiencoc" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

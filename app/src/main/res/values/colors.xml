@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#f29222</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#737373</color>
+
+    <!-- màu editText -->
+    <color name="editTextBG_white">#F3F9EA</color>
+    <!-- màu textView -->
+    <color name="textView_border_orange">#F2845C</color>
+    <color name="textViewBG_white">#FFFFFF</color>
+    <color name="textViewBG_red">#F2845C</color>
+    <!-- màu chữ -->
+    <color name="textColor_black">#000000</color>
+    <color name="textColor_red">#bb342f</color>
+    <color name="textColor_grey">#47484C</color>
+    <!-- màu button -->
+    <color name="button_textColor_white">#FFFFFF</color>
+    <color name="buttonBG_Color_red">#dd1c1a</color>
+    <!-- màu section/banner -->
+    <color name="app_banner_Color">#f29222</color>
+    <color name="app_banner_textColor">#FFFFFF</color>
+    <!-- màu toolbar -->
+    <color name="app_toolbar_Color">#f29222</color>
+    <color name="app_toolbar_textColor">#FFFFFF</color>
+    <!-- màu cardview -->
+    <color name="CardView_BGColor">#C8E4E2</color>
+    <color name="CardView_TextColor1">#000000</color>
+    <color name="CardView_TextColor2">#0024FF</color>
+    <color name="CardView_TextColor3">#FF0000</color>
+</resources>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/graph_navigation.xml"
+    app:startDestination="@id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.canlua.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_nav_home_to_addCustomerDialog"
+            app:destination="@id/addCustomerDialog"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_history"
+            app:destination="@id/historyFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.canlua.HistoryFragment"
+        android:label="@string/fragment_history"
+        tools:layout="@layout/fragment_history">
+        <action
+            android:id="@+id/action_historyFragment_to_inputRiceInfoFragment"
+            app:destination="@id/inputRiceInfoFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_historyFragment_to_editHistoryFragment"
+            app:destination="@id/editHistoryFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_info"
+        android:name="com.example.canlua.InfoFragment"
+        android:label="@string/menu_info"
+        tools:layout="@layout/fragment_info" />
+    <fragment
+        android:id="@+id/nav_contact"
+        android:name="com.example.canlua.LienLacFragment"
+        android:label="@string/menu_contact"
+        tools:layout="@layout/fragment_lien_lac" />
+    <dialog
+        android:id="@+id/addCustomerDialog"
+        android:name="com.example.canlua.AddCustomerDialog"
+        android:label="AddCustomerDialog"
+        tools:layout="@layout/dialog_customer_add">
+        <action
+            android:id="@+id/action_addCustomerDialog_to_nav_home"
+            app:destination="@id/nav_home"
+            app:popUpTo="@id/nav_home"
+            app:popUpToInclusive="true" />
+    </dialog>
+    <fragment
+        android:id="@+id/inputRiceInfoFragment"
+        android:name="com.example.canlua.InputRiceInfoFragment"
+        android:label="Nhập thông tin đơn hàng"
+        tools:layout="@layout/fragment_input_rice_info">
+        <action
+            android:id="@+id/action_inputRiceInfoFragment_to_inputRiceWeightFragment"
+            app:destination="@id/inputRiceWeightFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/inputRiceWeightFragment"
+        android:name="com.example.canlua.InputRiceWeightFragment"
+        android:label="Nhập thông tin đơn hàng"
+        tools:layout="@layout/fragment_input_rice_weight">
+        <action
+            android:id="@+id/action_inputRiceWeightFragment_to_historyFragment"
+            app:destination="@id/historyFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/historyFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/editHistoryFragment"
+        android:name="com.example.canlua.EditHistoryFragment"
+        android:label="Sửa thông tin đơn hàng"
+        tools:layout="@layout/fragment_edit_history" />
+</navigation>
