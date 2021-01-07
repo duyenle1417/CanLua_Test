@@ -2,6 +2,7 @@ package com.example.canlua;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
     private static Context context;
     public ArrayList<Customer> search;
     private ArrayList<Customer> list;
+    private String orderByTime = DatabaseContract.CustomerTable._ID + " DESC";
     private Filter filter = new Filter() {
 
         @Override
@@ -31,6 +33,10 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
             ArrayList<Customer> filteredList = new ArrayList<>();
 
             if (constraint == null || constraint.length() == 0) {
+                DatabaseHelper helper = new DatabaseHelper(context);
+                SharedPreferences sharedPreferences = context.getSharedPreferences("sort_customer", Context.MODE_PRIVATE);
+                search.clear();
+                search.addAll(helper.getAllCustomers(sharedPreferences.getString("sort_type", orderByTime)));
                 filteredList.addAll(search);
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();

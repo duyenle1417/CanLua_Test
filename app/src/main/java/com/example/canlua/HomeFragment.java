@@ -24,7 +24,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
 
@@ -91,22 +90,15 @@ public class HomeFragment extends Fragment
                 PopupMenu popup = new PopupMenu(getContext(), btn_sort);
                 popup.getMenuInflater().inflate(R.menu.sort_menu, popup.getMenu());
                 popup.show();
-                final SharedPreferences.Editor editor = sharedPreferences.edit();
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.sort_by_name:
-                                customerlist.clear();
-                                customerlist.addAll(helper.getAllCustomers(orderByName));
-                                adapter.notifyDataSetChanged();
-                                editor.putString("sort_type", orderByName).apply();
+                                Sort(orderByName);
                                 break;
                             case R.id.sort_by_time:
-                                customerlist.clear();
-                                customerlist.addAll(helper.getAllCustomers(orderByTime));
-                                adapter.notifyDataSetChanged();
-                                editor.putString("sort_type", orderByTime).apply();
+                                Sort(orderByTime);
                                 break;
                             default:
                                 throw new IllegalStateException("Unexpected value: " + item.getItemId());
@@ -120,16 +112,26 @@ public class HomeFragment extends Fragment
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                adapter.getFilter().filter(query);
+                adapter.getFilter().filter(query);//load kết quả khi ấn ic tìm kiếm
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
+                adapter.getFilter().filter(newText);//load kết quả khi gõ
                 return false;
             }
         });
+    }
+
+    //reload view khi chọn kiểu sort khác
+    private void Sort(String order) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        customerlist.clear();
+        customerlist.addAll(helper.getAllCustomers(order));
+        adapter.notifyDataSetChanged();
+        editor.putString("sort_type", order).apply();//lưu vào sharedpreferences
+        searchView.onActionViewCollapsed();//đóng khi reload view
     }
 
     @Override
@@ -164,7 +166,7 @@ public class HomeFragment extends Fragment
                     case R.id.menuDel_customer:
                         //delete from db
                         helper.deleteCustomer(customerlist.get(position));
-                        Snackbar.make(getActivity().findViewById(android.R.id.content),"Thông tin khách hàng đã được xóa!", Snackbar.LENGTH_SHORT)
+                        Snackbar.make(getActivity().findViewById(android.R.id.content), "Thông tin khách hàng đã được xóa!", Snackbar.LENGTH_SHORT)
                                 .show();
                         //reload recycle view and data set
                         recyclerView_customer.removeViewAt(position);
@@ -172,7 +174,7 @@ public class HomeFragment extends Fragment
                         if (!searchView.isIconified()) {
                             //trường hợp có dùng search view
                             searchView.onActionViewCollapsed();//đóng khung tìm kiếm và xóa tìm kiếm
-                            customerlist.addAll((Collection<? extends Customer>) adapter.search);
+                            customerlist.addAll(adapter.search);
                         } else {
                             customerlist.remove(position);
                         }
