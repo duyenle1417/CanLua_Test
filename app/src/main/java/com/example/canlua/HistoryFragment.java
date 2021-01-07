@@ -20,7 +20,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class HistoryFragment extends Fragment implements PopupMenuListener {
     FloatingActionButton btn_add_history;
@@ -116,12 +115,11 @@ public class HistoryFragment extends Fragment implements PopupMenuListener {
                         if (!searchView.isIconified()) {
                             //trường hợp có dùng search view
                             searchView.onActionViewCollapsed();//đóng khung tìm kiếm và xóa tìm kiếm
-                            historyList.addAll((Collection<? extends History>) adapter.search);
+                            historyList.addAll(adapter.search);
                         } else {
                             historyList.remove(position);
                         }
                         recyclerView_history.removeViewAt(position);
-                        historyList.remove(position);
                         adapter.notifyItemRemoved(position);
                         adapter.notifyDataSetChanged();
 
