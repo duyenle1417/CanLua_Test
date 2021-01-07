@@ -211,6 +211,7 @@ public class InputRiceWeightFragment extends Fragment {
                 args.putLong("ID", getArguments().getLong("id"));
                 Navigation.findNavController(getActivity(), R.id.nav_host_fragment)
                         .navigate(R.id.action_inputRiceWeightFragment_to_historyFragment, args);
+                HideKeyboard();
             }
         });
 
