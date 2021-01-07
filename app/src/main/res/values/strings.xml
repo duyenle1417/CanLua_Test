@@ -13,8 +13,8 @@
     <string name="empty_list_customer">Danh sách khách hàng trống</string>
     <string name="fragment_history">Lịch sử khách hàng</string>
     <string name="app_introduce">
-        ★ Phần mềm giúp cho bà con nông dân có thể tính nhanh mã cân sản phẩm của mình mà không cần phải dùng đến giấy bút.\n\n
-        ★ Nhanh chóng tiện lợi cho dù cân lúa buổi tối hay sáng.\n\n
-        ★ Không cần phải đem theo giấy bút và mất công tính toán như truyền thống cân lúa của bà con nông dân.
+        ★ Phần mềm giúp cho nông dân có thể tính toán và lưu trữ thông tin vụ lúa của mình.\n\n
+        ★ Chỉ cần bạn tải app này về điện thoại, bạn luôn có sẵn một cuốn sổ điện tử lưu trữ vụ lúa của mình.\n\n
+        ★ Không cần phải đem theo giấy bút và máy tính như cách truyền thống cân lúa của bà con nông dân.
     </string>
 </resources>
