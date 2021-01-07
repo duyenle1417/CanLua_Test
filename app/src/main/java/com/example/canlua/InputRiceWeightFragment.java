@@ -269,4 +269,10 @@ public class InputRiceWeightFragment extends Fragment {
         } else
             return input + ".0";
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        HideKeyboard();
+    }
 }

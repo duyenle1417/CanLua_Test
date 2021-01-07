@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.PopupMenu;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -20,6 +21,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 public class HistoryFragment extends Fragment implements PopupMenuListener {
     FloatingActionButton btn_add_history;
@@ -135,5 +138,16 @@ public class HistoryFragment extends Fragment implements PopupMenuListener {
                 return true;
             }
         });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        HideKeyboard();
+    }
+
+    private void HideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
     }
 }

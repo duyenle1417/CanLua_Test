@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements AddCustomerDialog
         navigationView = findViewById(R.id.nav_view);
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_manual, R.id.nav_info, R.id.nav_contact)
+                R.id.nav_home, R.id.nav_info, R.id.nav_contact)
                 .setOpenableLayout(drawerLayout)
                 .build();
         //thiết lập drawer, appBar

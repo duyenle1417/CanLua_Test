@@ -194,4 +194,15 @@ public class HomeFragment extends Fragment
             }
         });
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        HideKeyboard();
+    }
+
+    private void HideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+    }
 }

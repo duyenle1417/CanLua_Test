@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -17,6 +18,8 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 
 public class EditHistoryFragment extends Fragment {
@@ -119,5 +122,16 @@ public class EditHistoryFragment extends Fragment {
         }
 
         return data;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        HideKeyboard();
+    }
+
+    private void HideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -11,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 public class InputRiceInfoFragment extends Fragment {
 
@@ -96,5 +99,16 @@ public class InputRiceInfoFragment extends Fragment {
         }
 
         return data;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        HideKeyboard();
+    }
+
+    private void HideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
     }
 }
