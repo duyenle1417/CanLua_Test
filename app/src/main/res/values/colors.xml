@@ -28,4 +28,6 @@
     <color name="CardView_TextColor1">#000000</color>
     <color name="CardView_TextColor2">#0024FF</color>
     <color name="CardView_TextColor3">#FF0000</color>
+    <!-- màu custom -->
+    <color name="transparent_orange">#CCF29222</color>
 </resources>

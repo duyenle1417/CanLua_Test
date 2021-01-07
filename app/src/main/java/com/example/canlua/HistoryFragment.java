@@ -6,8 +6,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
+import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,14 +17,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class HistoryFragment extends Fragment implements PopupMenuListener {
     FloatingActionButton btn_add_history;
     RecyclerView recyclerView_history;
     TextView textView_notify_empty_history;
     TextView banner_name;
+    SearchView searchView;
     ArrayList<History> historyList;
     Customer customer;
     HistoryAdapter adapter;
@@ -39,6 +42,7 @@ public class HistoryFragment extends Fragment implements PopupMenuListener {
         recyclerView_history = view.findViewById(R.id.recycleview_history);
         textView_notify_empty_history = view.findViewById(R.id.history_notify_empty_recycleview);
         banner_name = view.findViewById(R.id.banner_name);
+        searchView = view.findViewById(R.id.search_bar_history);
         historyList = new ArrayList<>();
         customer = new Customer();
         helper = new DatabaseHelper(getContext());
@@ -72,6 +76,20 @@ public class HistoryFragment extends Fragment implements PopupMenuListener {
                         .navigate(R.id.action_historyFragment_to_inputRiceInfoFragment, args);
             }
         });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                adapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
     }
 
     @Override
@@ -89,11 +107,24 @@ public class HistoryFragment extends Fragment implements PopupMenuListener {
                                 .navigate(R.id.action_historyFragment_to_editHistoryFragment, args);
                         break;
                     case R.id.menuDel_history:
+                        //delete from db
                         helper.deleteHistory(historyList.get(position));
+                        Snackbar.make(getActivity().findViewById(android.R.id.content), "Thông tin lịch sử đơn hàng đã được xóa!", Snackbar.LENGTH_SHORT)
+                                .show();
+                        //reload view
+                        adapter.search.remove(position);
+                        if (!searchView.isIconified()) {
+                            //trường hợp có dùng search view
+                            searchView.onActionViewCollapsed();//đóng khung tìm kiếm và xóa tìm kiếm
+                            historyList.addAll((Collection<? extends History>) adapter.search);
+                        } else {
+                            historyList.remove(position);
+                        }
                         recyclerView_history.removeViewAt(position);
                         historyList.remove(position);
                         adapter.notifyItemRemoved(position);
                         adapter.notifyDataSetChanged();
+
                         if (historyList.isEmpty()) {
                             textView_notify_empty_history.setVisibility(View.VISIBLE);
                         } else {

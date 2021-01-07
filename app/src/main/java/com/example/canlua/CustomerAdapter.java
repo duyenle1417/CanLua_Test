@@ -12,8 +12,6 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.view.menu.MenuBuilder;
-import androidx.appcompat.view.menu.MenuPopupHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -80,7 +78,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
         holder.textView_name.setText(customer.getHoTen());
         holder.textView_phone.setText(customer.getSDT());
         holder.textView_date.setText("Thêm vào " + customer.getDate());
-        holder.textView_index.setText(String.valueOf(position+1));
+        holder.textView_index.setText(String.valueOf(position + 1));
         //open popup memu, include view, delete, fix data
         holder.ic_more_menu.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("RestrictedApi")

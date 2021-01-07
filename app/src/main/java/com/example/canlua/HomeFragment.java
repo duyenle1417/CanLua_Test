@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -50,7 +50,7 @@ public class HomeFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         btn_add_customer = view.findViewById(R.id.btn_add_customer);
         recyclerView_customer = view.findViewById(R.id.recycle_view_customer);
-        searchView = (SearchView) view.findViewById(R.id.search_bar);
+        searchView = view.findViewById(R.id.search_bar);
         btn_sort = view.findViewById(R.id.btn_sort);
         textView_notify_empty_customer = view.findViewById(R.id.home_notify_empty_recycleview);
         customerlist = new ArrayList<>();
@@ -164,6 +164,8 @@ public class HomeFragment extends Fragment
                     case R.id.menuDel_customer:
                         //delete from db
                         helper.deleteCustomer(customerlist.get(position));
+                        Snackbar.make(getActivity().findViewById(android.R.id.content),"Thông tin khách hàng đã được xóa!", Snackbar.LENGTH_SHORT)
+                                .show();
                         //reload recycle view and data set
                         recyclerView_customer.removeViewAt(position);
                         adapter.search.remove(position);

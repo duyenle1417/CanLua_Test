@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -16,15 +18,47 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 
-public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder> {
-    ArrayList<History> list;
-    Context context;
-    PopupMenuListener popupMenuListener;
+public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder> implements Filterable {
+    public ArrayList<History> search;
+    private ArrayList<History> list;
+    private Filter filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            ArrayList<History> filteredList = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(search);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for (History item : search) {
+                    if (item.getTenGiongLua().toLowerCase().contains(filterPattern) || item.getTimestamp().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            list.clear();
+            list.addAll((Collection<? extends History>) results.values);
+            notifyDataSetChanged();
+        }
+    };
+    private Context context;
+    private PopupMenuListener popupMenuListener;
 
     public HistoryAdapter(Context context, ArrayList<History> obj, PopupMenuListener popupMenuListener) {
         list = obj;
         this.context = context;
+        this.search = new ArrayList<>(obj);
         this.popupMenuListener = popupMenuListener;
     }
 
@@ -44,12 +78,12 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         decimalFormat.setRoundingMode(RoundingMode.UP);
 
         holder.textView_tengiong.setText(customer.getTenGiongLua());
-        holder.textView_dongia.setText(decimalFormat.format(customer.getDonGia()));
-        holder.textView_trubi.setText(String.format("%d", customer.getBaoBi()));
-        holder.textView_sobao.setText(String.format("%d", customer.getSoBao()));
-        holder.textView_sokg.setText(String.format("%s", customer.getTongSoKG()));
-        holder.textView_tiencoc.setText(decimalFormat.format(customer.getTienCoc()));
-        holder.textView_thanhtien.setText(decimalFormat.format(customer.getThanhTien()));
+        holder.textView_dongia.setText(String.format("%s VND", decimalFormat.format(customer.getDonGia())));
+        holder.textView_trubi.setText(String.format("%s bao/KG", customer.getBaoBi()));
+        holder.textView_sobao.setText(String.format("%s bao", customer.getSoBao()));
+        holder.textView_sokg.setText(String.format("%s KG", customer.getTongSoKG()));
+        holder.textView_tiencoc.setText(String.format("%s VND", decimalFormat.format(customer.getTienCoc())));
+        holder.textView_thanhtien.setText(String.format("%s VND", decimalFormat.format(customer.getThanhTien())));
         holder.textView_date.setText(customer.getTimestamp());
         holder.section_expand.setVisibility(View.GONE);
         holder.ic_more.setVisibility(View.VISIBLE);
@@ -84,6 +118,11 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return filter;
     }
 
     public static class HistoryViewHolder extends RecyclerView.ViewHolder {

@@ -8,11 +8,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
+import com.google.android.material.snackbar.Snackbar;
 
 //TO_DO: change to fragment and change layout of this
 public class AddCustomerDialog extends DialogFragment {
@@ -49,11 +50,14 @@ public class AddCustomerDialog extends DialogFragment {
     private void EditCustomer() {
         final Customer customer = helper.getCustomer(getArguments().getLong("ID"));
 
-        String phone = customer.getSDT();
+        final String phone = customer.getSDT(), checkPhone;
         if (phone.equals("(trống)")) {
             editText_phone.setText("");
-        } else
+            checkPhone = "";
+        } else {
             editText_phone.setText(phone);
+            checkPhone = phone;
+        }
         editText_name.setText(customer.getHoTen());
 
         builder.setView(view)
@@ -63,17 +67,18 @@ public class AddCustomerDialog extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         String name = editText_name.getText().toString().trim().replace("'", "");
                         String phone = editText_phone.getText().toString().trim();
-                        if ((!name.equals(customer.getHoTen()) || !phone.equals(editText_phone.getText()))
+                        if ((!name.equals(customer.getHoTen()) || !phone.equals(checkPhone))
                                 && name.length() > 0) {
                             customer.setHoTen(name);
                             customer.setSDT(phone);
                             helper.updateCustomer(customer);
                             listener.ApplyChange();
+                            Snackbar.make(getActivity().findViewById(android.R.id.content), "Thông tin khách hàng đã được cập nhật!", Snackbar.LENGTH_SHORT)
+                                    .show();
                         } else {
                             if (name.length() <= 0)
-                                Toast.makeText(view.getContext(), "Lỗi! Không được để trống tên.", Toast.LENGTH_SHORT).show();
-                            else
-                                Toast.makeText(view.getContext(), "Dữ liệu không thay đổi!", Toast.LENGTH_SHORT).show();
+                                Snackbar.make(getActivity().findViewById(android.R.id.content), "ERROR! Không được để trống tên.", Snackbar.LENGTH_SHORT)
+                                        .show();
                         }
                     }
                 })
@@ -101,8 +106,11 @@ public class AddCustomerDialog extends DialogFragment {
                             //AddCustomer to DB
                             helper.addCustomer(customer);
                             listener.ApplyChange();
+                            Snackbar.make(getActivity().findViewById(android.R.id.content), "Đã thêm một khách hàng mới!", Snackbar.LENGTH_SHORT)
+                                    .show();
                         } else {
-                            Toast.makeText(view.getContext(), "Lỗi! Không được để trống tên.", Toast.LENGTH_SHORT).show();
+                            Snackbar.make(getActivity().findViewById(android.R.id.content), "Lỗi! Không được để trống tên.", Snackbar.LENGTH_SHORT)
+                                    .show();
                         }
                     }
                 })

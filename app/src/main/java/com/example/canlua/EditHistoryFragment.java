@@ -13,6 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
@@ -66,18 +68,56 @@ public class EditHistoryFragment extends Fragment {
         btn_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                layout.setVisibility(View.VISIBLE);
-                history.setTenGiongLua(editText_tenLua.getText().toString());
-                history.setDonGia(Integer.parseInt(editText_dongia.getText().toString()));
-                history.setBaoBi(Integer.parseInt(editText_trubi.getText().toString()));
-                history.setTienCoc(Integer.parseInt(editText_tiencoc.getText().toString()));
-                double money = history.getDonGia() * (history.getTongSoKG() - ((1.0 / history.getBaoBi() * history.getSoBao())));
-                history.setThanhTien(money);
-                helper.updateHistory(history);
+                if (validateData()) {
+                    layout.setVisibility(View.VISIBLE);
+                    history.setTenGiongLua(editText_tenLua.getText().toString());
+                    history.setDonGia(Integer.parseInt(editText_dongia.getText().toString()));
+                    history.setBaoBi(Integer.parseInt(editText_trubi.getText().toString()));
+                    history.setTienCoc(Integer.parseInt(editText_tiencoc.getText().toString()));
+                    double money = history.getDonGia() * (history.getTongSoKG() - ((1.0 / history.getBaoBi() * history.getSoBao())));
+                    history.setThanhTien(money);
+                    helper.updateHistory(history);
+                    Snackbar.make(getActivity().findViewById(android.R.id.content), "Thông tin đơn hàng đã được cập nhật!", Snackbar.LENGTH_SHORT)
+                            .show();
 
-                textView_tongkg.setText(decimalFormat.format(history.getTongSoKG()));
-                textView_thanhtien.setText(moneyFormat.format(money));
+                    textView_tongkg.setText(decimalFormat.format(history.getTongSoKG()));
+                    textView_thanhtien.setText(moneyFormat.format(money));
+                }
             }
         });
+    }
+
+    private boolean validateData() {
+        int dongia, trubi;
+        boolean data = true;
+
+        if (editText_dongia.getText().toString().length() == 0) {
+            editText_dongia.setError("Không được bỏ trống");
+            data = false;
+        } else {
+            dongia = Integer.parseInt(editText_dongia.getText().toString());
+            if (dongia == 0) {
+                editText_dongia.setError("Giá trị phải lớn hơn 0");
+                data = false;
+            }
+        }
+
+        if (editText_trubi.getText().toString().length() == 0) {
+            editText_trubi.setError("Không được bỏ trống");
+            data = false;
+        } else {
+            trubi = Integer.parseInt(editText_trubi.getText().toString());
+            if (trubi == 0) {
+                editText_trubi.setError("Giá trị phải lớn hơn 0");
+                data = false;
+            }
+        }
+
+        if (editText_tiencoc.getText().toString().length() == 0) {
+            editText_tiencoc.setError("Không được bỏ trống");
+            data = false;
+        }
+
+        return data;
     }
 }

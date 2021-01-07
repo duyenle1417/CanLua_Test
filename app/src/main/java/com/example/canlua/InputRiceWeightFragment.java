@@ -6,24 +6,29 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 public class InputRiceWeightFragment extends Fragment {
     GridView gridView_weight;
@@ -61,9 +66,15 @@ public class InputRiceWeightFragment extends Fragment {
         return view;
     }
 
+    private void HideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        HideKeyboard();
         gridView_weight.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
@@ -193,11 +204,22 @@ public class InputRiceWeightFragment extends Fragment {
                 history.setSoBao(sumOfBag);
                 history.setThanhTien(money);
                 helper.addHistory(history);
+                Snackbar.make(getActivity().findViewById(android.R.id.content), "Đã thêm lịch sử đơn hàng mới!", Snackbar.LENGTH_SHORT)
+                        .show();
                 //quay về giao diện history
                 Bundle args = new Bundle();
                 args.putLong("ID", getArguments().getLong("id"));
                 Navigation.findNavController(getActivity(), R.id.nav_host_fragment)
                         .navigate(R.id.action_inputRiceWeightFragment_to_historyFragment, args);
+            }
+        });
+
+        //hide keyboard
+        view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                HideKeyboard();
+                return true;
             }
         });
     }

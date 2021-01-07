@@ -17,6 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleview_history"
         android:layout_width="0dp"
@@ -26,6 +27,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/banner_name"
         tools:listitem="@layout/history_item" />
+
+    <SearchView
+        android:id="@+id/search_bar_history"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:background="@drawable/search_bar"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_add_history"

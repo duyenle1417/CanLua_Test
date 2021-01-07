@@ -59,7 +59,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //add new customer
     public void addCustomer(Customer customer) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
         String date = dateFormat.format(Calendar.getInstance().getTime());//time lấy khi ấn OK
         sqLiteDatabase = this.getWritableDatabase();
 
@@ -155,7 +155,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //add new customer
     public void addHistory(History history) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
         String date = dateFormat.format(Calendar.getInstance().getTime());//khi thêm sẽ lấy thời gian ngay khi click
         sqLiteDatabase = this.getWritableDatabase();
 

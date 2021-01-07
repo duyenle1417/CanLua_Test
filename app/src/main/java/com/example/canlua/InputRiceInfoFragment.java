@@ -44,19 +44,57 @@ public class InputRiceInfoFragment extends Fragment {
         btn_to_input_weight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String tengiong = editText_tengiong.getText().toString();
-                int dongia = Integer.parseInt(editText_dongia.getText().toString());
-                int trubi = Integer.parseInt(editText_trubi.getText().toString());
-                int tiencoc = Integer.parseInt(editText_tiencoc.getText().toString());
-                Bundle args = new Bundle();
-                args.putString("tengiong", tengiong);
-                args.putInt("dongia", dongia);
-                args.putInt("trubi", trubi);
-                args.putInt("tiencoc", tiencoc);
-                args.putLong("id", getArguments().getLong("id"));
-                Navigation.findNavController(getActivity(), R.id.nav_host_fragment)
-                        .navigate(R.id.action_inputRiceInfoFragment_to_inputRiceWeightFragment, args);
+                if (validateData()) {
+                    String tengiong = editText_tengiong.getText().toString().trim();
+                    int dongia, tiencoc, trubi;
+                    dongia = Integer.parseInt(editText_dongia.getText().toString());
+                    trubi = Integer.parseInt(editText_trubi.getText().toString());
+                    tiencoc = Integer.parseInt(editText_tiencoc.getText().toString());
+
+                    Bundle args = new Bundle();
+                    args.putString("tengiong", tengiong);
+                    args.putInt("dongia", dongia);
+                    args.putInt("trubi", trubi);
+                    args.putInt("tiencoc", tiencoc);
+                    args.putLong("id", getArguments().getLong("id"));
+                    Navigation.findNavController(getActivity(), R.id.nav_host_fragment)
+                            .navigate(R.id.action_inputRiceInfoFragment_to_inputRiceWeightFragment, args);
+                }
             }
         });
+    }
+
+    private boolean validateData() {
+        int dongia, trubi;
+        boolean data = true;
+
+        if (editText_dongia.getText().toString().length() == 0) {
+            editText_dongia.setError("Không được bỏ trống");
+            data = false;
+        } else {
+            dongia = Integer.parseInt(editText_dongia.getText().toString());
+            if (dongia == 0) {
+                editText_dongia.setError("Giá trị phải lớn hơn 0");
+                data = false;
+            }
+        }
+
+        if (editText_trubi.getText().toString().length() == 0) {
+            editText_trubi.setError("Không được bỏ trống");
+            data = false;
+        } else {
+            trubi = Integer.parseInt(editText_trubi.getText().toString());
+            if (trubi == 0) {
+                editText_trubi.setError("Giá trị phải lớn hơn 0");
+                data = false;
+            }
+        }
+
+        if (editText_tiencoc.getText().toString().length() == 0) {
+            editText_tiencoc.setError("Không được bỏ trống");
+            data = false;
+        }
+
+        return data;
     }
 }
