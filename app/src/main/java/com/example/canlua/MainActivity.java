@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements AddCustomerDialog
         navigationView = findViewById(R.id.nav_view);
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_info, R.id.nav_contact)
+                R.id.nav_home, R.id.nav_manual, R.id.nav_info, R.id.nav_contact)
                 .setOpenableLayout(drawerLayout)
                 .build();
         //thiết lập drawer, appBar

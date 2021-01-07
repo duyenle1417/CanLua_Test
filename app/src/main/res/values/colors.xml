@@ -5,7 +5,6 @@
     <color name="colorAccent">#737373</color>
 
     <!-- màu editText -->
-    <color name="editTextBG_white">#F3F9EA</color>
     <!-- màu textView -->
     <color name="textView_border_orange">#F2845C</color>
     <color name="textViewBG_white">#FFFFFF</color>
@@ -24,10 +23,6 @@
     <color name="app_toolbar_Color">#f29222</color>
     <color name="app_toolbar_textColor">#FFFFFF</color>
     <!-- màu cardview -->
-    <color name="CardView_BGColor">#C8E4E2</color>
-    <color name="CardView_TextColor1">#000000</color>
-    <color name="CardView_TextColor2">#0024FF</color>
-    <color name="CardView_TextColor3">#FF0000</color>
     <!-- màu custom -->
     <color name="transparent_orange">#CCF29222</color>
 </resources>

@@ -99,4 +99,9 @@
         android:name="com.example.canlua.EditHistoryFragment"
         android:label="Sửa thông tin đơn hàng"
         tools:layout="@layout/fragment_edit_history" />
+    <fragment
+        android:id="@+id/nav_manual"
+        android:name="com.example.canlua.HuongDanFragment"
+        android:label="fragment_huong_dan"
+        tools:layout="@layout/fragment_huong_dan" />
 </navigation>

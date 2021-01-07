@@ -1,18 +1,12 @@
 <resources>
-    <string name="app_name">CanLua</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="app_name">Cân Lúa</string>
     <string name="nav_header_title">Cân Lúa</string>
     <string name="nav_header_subtitle">Phiên bản 1.0</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Cài đặt</string>
 
     <string name="menu_home">Trang chính</string>
-    <string name="menu_history">Tất cả lịch sử</string>
     <string name="menu_contact">Thông tin liên hệ</string>
     <string name="menu_info">Thông tin ứng dụng</string>
     <string name="menu_manual">Hướng dẫn sử dụng</string>
-    <string name="menu_chart">Thống kê lúa</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="empty_list_history">Danh sách lịch sử trống</string>

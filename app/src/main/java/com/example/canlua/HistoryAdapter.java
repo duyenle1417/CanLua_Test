@@ -11,7 +11,6 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -137,7 +136,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         public ImageView ic_more_menu;
         public ImageView ic_more;
         public ImageView ic_less;
-        CardView cardView;
         ConstraintLayout section_expand;
 
         public HistoryViewHolder(@NonNull View itemView) {
@@ -153,7 +151,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
             ic_more_menu = itemView.findViewById(R.id.ic_more_menu_history);
             ic_more = itemView.findViewById(R.id.ic_expand_more);
             ic_less = itemView.findViewById(R.id.ic_expand_less);
-            cardView = itemView.findViewById(R.id.home_item_card);
             section_expand = itemView.findViewById(R.id.expand_section);
 
             itemView.setOnClickListener(new View.OnClickListener() {
